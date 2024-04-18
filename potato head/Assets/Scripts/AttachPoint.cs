@@ -16,7 +16,8 @@ public class AttachPoint : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     private void Start()
     {
         PartManager = GameObject.FindWithTag("GameController").GetComponent<PartManager>();
-        potato = GameObject.FindWithTag("Potato").transform;
+        if (potato == null)
+            potato = GameObject.FindWithTag("Potato").transform;
         mesh = gameObject.GetComponent<MeshRenderer>();
         
         transform.LookAt(potato);

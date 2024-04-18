@@ -7,6 +7,7 @@ public class CameraControl : MonoBehaviour
 {
     public Transform potato;
     public float rotateSpeed;
+    public float zoomSpeed;
     
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,13 @@ public class CameraControl : MonoBehaviour
         if (Mouse.current.rightButton.isPressed)
         {
             RotateCamera();
+        }
+
+        if (Input.mouseScrollDelta != Vector2.zero)
+        {
+            Debug.Log(Input.mouseScrollDelta.y);
+            transform.Translate(Vector3.forward * (Input.mouseScrollDelta.y * zoomSpeed));
+            if (transform.position.z > -3f) transform.position = new Vector3(0, 0, -3f);
         }
     }
 
@@ -35,5 +43,6 @@ public class CameraControl : MonoBehaviour
     public void ResetView()
     {
         potato.rotation = Quaternion.identity;
+        transform.position = new Vector3(0, 0, -10);
     }
 }
